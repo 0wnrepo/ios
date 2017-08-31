@@ -919,15 +919,12 @@ connection_declined  Connection declined by user
                                                 
                                                 
                                                 if self.loginMode == .create {
-                                                    self.user?.idUser = ManageAccounts().storeAccountAndGetIdOfUser(self.user!, withCredentials: credentials)
-                                                    if self.user?.idUser != 0 {
-                                                        ManageFiles().storeListOfFiles(listOfFileDtos!, forFileId: 0, andUser: self.user!)
+                                                    
+                                                    ManageAccounts().storeAccountOfUser(self.user!, withCredentials: credentials)
+                                                    
+                                                    ManageFiles().storeListOfFiles(listOfFileDtos!, forFileId: 0, andUser: self.user!)
                                                         
-                                                        app.generateAppInterface(fromLoginScreen: true)
-                                                        
-                                                    } else {
-                                                        self.showURLError(NSLocalizedString("error_could_not_add_account", comment: ""))
-                                                    }
+                                                    app.generateAppInterface(fromLoginScreen: true)
                                                     
                                                 } else {
                                                     ManageAccounts().updateAccountOfUser(self.user!, withCredentials: credentials)
